@@ -2,8 +2,8 @@ package co.inventorsoft;
 
 import co.inventorsoft.model.Person;
 import co.inventorsoft.model.User;
-import org.junit.Before;
-import org.junit.Test;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 import java.util.*;
 
@@ -17,7 +17,7 @@ public class StreamHomeworkTest {
     private List<Person> people;
     private List<String> emails;
 
-    @Before
+    @BeforeTest
     public void initializeTest() {
         homework = new StreamHomework();
         people = Arrays.asList(
