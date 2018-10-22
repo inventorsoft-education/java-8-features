@@ -82,11 +82,10 @@ public class StreamHomework {
      * @return string with unique names, like "Distinct names: a, b, c!"
      */
     public String collectDistinctNames(final List<Person> people) {
-        String names ="Distinct names: ";
-        names += people.stream()
+        String names = people.stream()
                 .map(Person::getName)
                 .distinct()
-                .collect(joining(", ")) + "!";
+                .collect(joining(", ", "Distinct names: ","!"));
         return names;
     }
 }
