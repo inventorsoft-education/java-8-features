@@ -2,9 +2,14 @@ package co.inventorsoft;
 
 import co.inventorsoft.model.Person;
 import co.inventorsoft.model.User;
+import com.sun.istack.internal.Nullable;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.toList;
 
 /**
  * Contains simple cases for trying Stream API in action.
@@ -18,7 +23,15 @@ public class StreamHomework {
      * @return collection of teenagers
      */
     public List<Person> extractTeenagers(final List<Person> people) {
-        return null;
+
+        List<Person> teenagerPersons = people.stream()
+                .filter(person -> person.getAge() >= 13 && person.getAge() <= 19)
+                .filter(Objects::nonNull)
+                .collect(toList());
+
+        teenagerPersons.stream().forEach(System.out::println);
+
+        return teenagerPersons;
     }
 
     /**
@@ -29,7 +42,21 @@ public class StreamHomework {
      * @return collection of user, without duplicates
      */
     public List<User> createUsers(final List<String> emails) {
-        return null;
+
+        Set<String> emailsForUsers = emails.stream()
+                .filter(Objects::nonNull)
+                .collect(Collectors.toSet());
+
+        @Nullable
+        List<User> users = emailsForUsers.stream()
+                .filter(email -> email.endsWith("@gmail.com"))
+                .distinct()
+                .map(User::new)
+                .collect(Collectors.toList());
+
+        users.stream().forEach(System.out::println);
+
+        return users;
     }
 
     /**
@@ -39,7 +66,10 @@ public class StreamHomework {
      * @return map {user email : user}
      */
     public Map<String, User> groupByEmail(final List<User> users) {
-        return null;
+        Map<String, User> usersByEmail = users.stream()
+                .collect(Collectors.toMap(User::getEmail, Function.identity()));
+
+        return usersByEmail;
     }
 
     /**
@@ -49,19 +79,28 @@ public class StreamHomework {
      * @return map {age : people with this age}
      */
     public Map<Integer, List<Person>> groupByAge(final List<Person> people) {
-        return null;
+
+        Map<Integer, List<Person>> personsByAge = people.stream()
+                .collect(groupingBy(Person::getAge));
+
+        return personsByAge;
     }
 
     /**
      * Creates single string, representing all people names, emphasizing uniqueness!
      * Example:
-     *    input:  [{13, "Harry"}, {13, "Ron"}, {14, "Hermione"}, {13, "Harry"}]
-     *    output: "Distinct names: Harry, Ron, Hermione!"
+     * input:  [{13, "Harry"}, {13, "Ron"}, {14, "Hermione"}, {13, "Harry"}]
+     * output: "Distinct names: Harry, Ron, Hermione!"
      *
      * @param people collection of people
      * @return string with unique names, like "Distinct names: a, b, c!"
      */
     public String collectDistinctNames(final List<Person> people) {
-        return null;
+
+        String namesOfPersons = people.stream()
+                .map(Person::getName)
+                .collect(Collectors.joining(","));
+
+        return namesOfPersons;
     }
 }
