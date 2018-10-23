@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toSet;
 
 /**
  * Contains simple cases for trying Stream API in action.
@@ -42,21 +43,12 @@ public class StreamHomework {
     public List<User> createUsers(final List<String> emails) {
 
         List<User> users = emails.stream()
+                .filter(Objects::nonNull)
                 .distinct()
-                .map(User::new)
-                .collect(Collectors.toList());
+                .map(User::new).collect(toList());
 
         return users;
 
-        /*Set<String> emailsForUsers = emails.stream()
-                .filter(Objects::nonNull)
-                .collect(Collectors.toSet());
-        List<User> users = emailsForUsers.stream()
-                .filter(Objects::nonNull)
-                .map(User::new)
-                .collect(Collectors.toList());
-
-        return users;*/
     }
 
     /**
