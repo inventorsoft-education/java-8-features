@@ -41,16 +41,22 @@ public class StreamHomework {
      */
     public List<User> createUsers(final List<String> emails) {
 
-        Set<String> emailsForUsers = emails.stream()
-                .filter(Objects::nonNull)
-                .collect(Collectors.toSet());
-
-
-        List<User> users = emailsForUsers.stream()
+        List<User> users = emails.stream()
+                .distinct()
                 .map(User::new)
                 .collect(Collectors.toList());
 
         return users;
+
+        /*Set<String> emailsForUsers = emails.stream()
+                .filter(Objects::nonNull)
+                .collect(Collectors.toSet());
+        List<User> users = emailsForUsers.stream()
+                .filter(Objects::nonNull)
+                .map(User::new)
+                .collect(Collectors.toList());
+
+        return users;*/
     }
 
     /**
