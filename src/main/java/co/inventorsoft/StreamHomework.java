@@ -45,10 +45,8 @@ public class StreamHomework {
                 .filter(Objects::nonNull)
                 .collect(Collectors.toSet());
 
-        @Nullable
+
         List<User> users = emailsForUsers.stream()
-                .filter(email -> email.endsWith("@gmail.com"))
-                .distinct()
                 .map(User::new)
                 .collect(Collectors.toList());
 
