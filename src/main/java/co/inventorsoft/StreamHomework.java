@@ -29,8 +29,6 @@ public class StreamHomework {
                 .filter(Objects::nonNull)
                 .collect(toList());
 
-        teenagerPersons.stream().forEach(System.out::println);
-
         return teenagerPersons;
     }
 
@@ -53,8 +51,6 @@ public class StreamHomework {
                 .distinct()
                 .map(User::new)
                 .collect(Collectors.toList());
-
-        users.stream().forEach(System.out::println);
 
         return users;
     }
@@ -99,7 +95,8 @@ public class StreamHomework {
 
         String namesOfPersons = people.stream()
                 .map(Person::getName)
-                .collect(Collectors.joining(","));
+                .distinct()
+                .collect(Collectors.joining(", ", "Distinct names: ", "!"));
 
         return namesOfPersons;
     }
