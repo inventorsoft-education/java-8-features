@@ -22,10 +22,10 @@ public class StreamHomework {
      * @return collection of teenagers
      */
     public List<Person> extractTeenagers(final List<Person> people) {
-        List<Person> teenagers = people.stream()
+         return  people.stream()
                 .filter(Person::isTeenager)
                 .collect(toList());
-        return teenagers;
+
     }
 
     /**
@@ -36,12 +36,11 @@ public class StreamHomework {
      * @return collection of user, without duplicates
      */
     public List<User> createUsers(final List<String> emails) {
-        List<User> users = emails.stream()
-                .distinct()
+        return  emails.stream()
                 .filter(Objects::nonNull)
+                .distinct()
                 .map(User::new)
                 .collect(toList());
-        return users;
     }
 
     /**
@@ -52,10 +51,10 @@ public class StreamHomework {
      */
     public Map<String, User> groupByEmail(final List<User> users) {
 
-        Map<String, User> userMap = users.stream()
+        return users.stream()
                 .collect(toMap(User::getEmail, Function.identity()));
 
-        return userMap;
+
     }
 
     /**
@@ -66,10 +65,9 @@ public class StreamHomework {
      */
     public Map<Integer, List<Person>> groupByAge(final List<Person> people) {
 
-        Map<Integer, List<Person>> listMap = people.stream()
+        return  people.stream()
                 .collect(groupingBy(Person::getAge));
 
-        return listMap;
     }
 
     /**

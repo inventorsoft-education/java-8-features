@@ -18,8 +18,6 @@ public class Person {
     }
 
     public boolean isTeenager(){
-        if (this.getAge() < 19 && this.getAge() > 13)
-            return true;
-        return false;
+       return this.getAge() < 19 && this.getAge() > 13;
     }
 }
