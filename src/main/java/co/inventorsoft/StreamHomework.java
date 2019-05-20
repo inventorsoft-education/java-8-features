@@ -39,8 +39,8 @@ public class StreamHomework {
      * @return collection of user, without duplicates
      */
     public List<User> createUsers(final List<String> emails) {
-        List<User> usersList      = emails.stream().
-                                    filter(Objects::nonNull)
+        List<User> usersList      = emails.stream()
+                                    .filter(Objects::nonNull)
                                     .distinct()
                                     .filter(email->email.endsWith("@gmail.com"))
                                     .map(User::new)
@@ -58,7 +58,7 @@ public class StreamHomework {
 
 
         Map<String,User> usersMap=users.stream()
-                                  .filter(User -> User.getEmail()!=null)
+                                  .filter(user -> user.getEmail()!=null)
                                    .collect(toMap(User::getEmail, Function.identity()));
 
         return usersMap;
@@ -73,7 +73,7 @@ public class StreamHomework {
     public Map<Integer, List<Person>> groupByAge(final List<Person> people) {
 
         Map<Integer,List<Person>> mapGroupByAge=people.stream()
-                                                .filter(Person->Person.getName()!=null && Person.getAge()!=null)
+                                                .filter(person->person.getName()!=null && person.getAge()!=null)
                                                 .collect(Collectors.groupingBy(Person::getAge));
 
         return mapGroupByAge;
@@ -91,11 +91,10 @@ public class StreamHomework {
     public String collectDistinctNames(final List<Person> people) {
 
 
-        String extra="Distinct names:";
-         String distinctName=people.stream()
-                            .map(Person::getName)
-                            .distinct()
-                            .collect(Collectors.joining(", ", " ", "!"));
-        return extra+distinctName;
+         String distinctName="Distinct names:"+  people.stream()
+                                                 .map(Person::getName)
+                                                 .distinct()
+                                                 .collect(Collectors.joining(", ", " ", "!"));
+        return distinctName;
     }
 }
