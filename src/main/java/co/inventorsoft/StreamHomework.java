@@ -39,13 +39,12 @@ public class StreamHomework {
      * @return collection of user, without duplicates
      */
     public List<User> createUsers(final List<String> emails) {
-        List<User> usersList      = emails.stream()
-                                    .filter(Objects::nonNull)
-                                    .distinct()
-                                    .filter(email->email.endsWith("@gmail.com"))
-                                    .map(User::new)
-                                    .collect(toList());
-        return usersList;
+        return   emails.stream()
+                .filter(Objects::nonNull)
+                .distinct()
+                .map(User::new)
+                .collect(toList());
+
     }
 
     /**
@@ -57,11 +56,10 @@ public class StreamHomework {
     public Map<String, User> groupByEmail(final List<User> users) {
 
 
-        Map<String,User> usersMap=users.stream()
-                                  .filter(user -> user.getEmail()!=null)
-                                   .collect(toMap(User::getEmail, Function.identity()));
+        return  users.stream()
+                .filter(user -> user.getEmail()!=null)
+                .collect(toMap(User::getEmail, Function.identity()));
 
-        return usersMap;
     }
 
     /**
@@ -72,11 +70,10 @@ public class StreamHomework {
      */
     public Map<Integer, List<Person>> groupByAge(final List<Person> people) {
 
-        Map<Integer,List<Person>> mapGroupByAge=people.stream()
-                                                .filter(person->person.getName()!=null && person.getAge()!=null)
-                                                .collect(Collectors.groupingBy(Person::getAge));
+        return   people.stream()
+                .filter(person->person.getName()!=null && person.getAge()!=null)
+                .collect(Collectors.groupingBy(Person::getAge));
 
-        return mapGroupByAge;
     }
 
     /**
@@ -91,10 +88,10 @@ public class StreamHomework {
     public String collectDistinctNames(final List<Person> people) {
 
 
-         String distinctName="Distinct names:"+  people.stream()
-                                                 .map(Person::getName)
-                                                 .distinct()
-                                                 .collect(Collectors.joining(", ", " ", "!"));
-        return distinctName;
+         return  people.stream()
+                 .map(Person::getName)
+                 .distinct()
+                 .collect(Collectors.joining(", ", "Distinct names: ", "!"));
+
     }
 }
