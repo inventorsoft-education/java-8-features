@@ -4,9 +4,7 @@ import co.inventorsoft.model.Person;
 import co.inventorsoft.model.User;
 import org.junit.Before;
 import org.junit.Test;
-
 import java.util.*;
-
 import static java.util.stream.Collectors.toList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

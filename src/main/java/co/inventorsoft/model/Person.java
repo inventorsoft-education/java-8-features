@@ -1,6 +1,7 @@
 package co.inventorsoft.model;
 
 public class Person {
+
     private final String name;
     private final Integer age;
 
@@ -16,4 +17,5 @@ public class Person {
     public Integer getAge() {
         return age;
     }
+
 }

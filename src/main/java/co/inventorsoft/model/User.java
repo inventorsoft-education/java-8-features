@@ -1,6 +1,7 @@
 package co.inventorsoft.model;
 
 public class User {
+
     private final String email;
 
     public User(String email) {
@@ -10,4 +11,5 @@ public class User {
     public String getEmail() {
         return email;
     }
+
 }
