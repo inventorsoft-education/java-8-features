@@ -5,6 +5,9 @@ import co.inventorsoft.model.User;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.function.Function;
 
 /**
  * Contains simple cases for trying Stream API in action.
@@ -18,18 +21,25 @@ public class StreamHomework {
      * @return collection of teenagers
      */
     public List<Person> extractTeenagers(final List<Person> people) {
-        return null;
+
+        return people.stream()
+                .filter(person -> (person.getAge() >= 13 && person.getAge() <= 19))
+                .collect(Collectors.toList());
     }
 
     /**
      * Creates users, based on given collection of emails.
-     * Handles email duplicates and null-values.
-     *
-     * @param emails collection of emails, duplicates or null-values are possible
-     * @return collection of user, without duplicates
+     * * Handles email duplicates and null-values.
+     * *
+     * * @param emails collection of emails, duplicates or null-values are possible
+     * * @return collection of user, without duplicates
      */
     public List<User> createUsers(final List<String> emails) {
-        return null;
+        return emails.stream()
+                .filter(Objects::nonNull)
+                .distinct()
+                .map(User::new)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -39,7 +49,9 @@ public class StreamHomework {
      * @return map {user email : user}
      */
     public Map<String, User> groupByEmail(final List<User> users) {
-        return null;
+
+        return users.stream()
+                .collect(Collectors.toMap(User::getEmail,Function.identity()));
     }
 
     /**
@@ -49,19 +61,23 @@ public class StreamHomework {
      * @return map {age : people with this age}
      */
     public Map<Integer, List<Person>> groupByAge(final List<Person> people) {
-        return null;
+        return people.stream()
+                .collect(Collectors.groupingBy(Person::getAge));
     }
 
     /**
      * Creates single string, representing all people names, emphasizing uniqueness!
      * Example:
-     *    input:  [{13, "Harry"}, {13, "Ron"}, {14, "Hermione"}, {13, "Harry"}]
-     *    output: "Distinct names: Harry, Ron, Hermione!"
+     * input:  [{13, "Harry"}, {13, "Ron"}, {14, "Hermione"}, {13, "Harry"}]
+     * output: "Distinct names: Harry, Ron, Hermione!"
      *
      * @param people collection of people
      * @return string with unique names, like "Distinct names: a, b, c!"
      */
     public String collectDistinctNames(final List<Person> people) {
-        return null;
+        return people.stream()
+                .map(Person::getName)
+                .distinct()
+                .collect(Collectors.joining(", " ,"Distinct names: ","!"));
     }
 }
