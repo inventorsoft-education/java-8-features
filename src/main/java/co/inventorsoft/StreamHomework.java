@@ -47,7 +47,7 @@ public class StreamHomework {
      */
     public Map<String, User> groupByEmail(final List<User> users) {
         return users.stream()
-                    .collect(Collectors.toMap(User::getEmail,user -> user));
+                    .collect(Collectors.toMap(User::getEmail, Function.identity()));
     }
 
     /**
