@@ -64,9 +64,10 @@ public class StreamHomework {
      * @return map {user email : user}
      */
     public Map<String, User> groupByEmail(final List<User> users) {
-        Map<String, User> usersMap = users.stream()
-                .collect(toMap(User::getEmail, Function.identity()));
-
+        Map<String, User> usersMap = new HashMap<>();
+        for(int i=0; i<users.size(); ++i){
+            usersMap.put(users.get(i).getEmail(), users.get(i));
+        }
         return usersMap;
     }
 
