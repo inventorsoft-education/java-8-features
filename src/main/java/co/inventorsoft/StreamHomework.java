@@ -4,6 +4,7 @@ import co.inventorsoft.model.Person;
 import co.inventorsoft.model.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -59,7 +60,11 @@ public class StreamHomework {
      * @return map {user email : user}
      */
     public Map<String, User> groupByEmail(final List<User> users) {
-        return null;
+        Map<String, User> usersMap = new HashMap<>();
+        for(int i=0; i<users.size(); ++i){
+            usersMap.put(users.get(i).getEmail(), users.get(i));
+        }
+        return usersMap;
     }
 
     /**
