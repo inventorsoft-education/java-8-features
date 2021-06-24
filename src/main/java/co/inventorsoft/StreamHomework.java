@@ -6,6 +6,8 @@ import co.inventorsoft.model.User;
 import java.util.List;
 import java.util.Map;
 
+import static java.util.stream.Collectors.toList;
+
 /**
  * Contains simple cases for trying Stream API in action.
  */
@@ -18,7 +20,10 @@ public class StreamHomework {
      * @return collection of teenagers
      */
     public List<Person> extractTeenagers(final List<Person> people) {
-        return null;
+        List<Person> teens = people.stream()
+                .filter(i -> i.getAge()>= 13 && i.getAge()<=19)
+                .collect(toList());
+        return teens;
     }
 
     /**
