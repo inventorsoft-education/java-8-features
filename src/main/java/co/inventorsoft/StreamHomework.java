@@ -3,6 +3,7 @@ package co.inventorsoft;
 import co.inventorsoft.model.Person;
 import co.inventorsoft.model.User;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -34,7 +35,21 @@ public class StreamHomework {
      * @return collection of user, without duplicates
      */
     public List<User> createUsers(final List<String> emails) {
-        return null;
+        List<String> emailsWithoutDup = emails.stream()
+                .filter(email-> email!=null && !email.isEmpty())
+                .distinct()
+                .collect(toList());
+
+        List<User> users = new ArrayList<>();
+        for(int i=0; i<emailsWithoutDup.size(); ++i){
+            users.add(new User(emails.get(i)));
+        }
+
+        users = users.stream()
+                .distinct()
+                .collect(toList());
+
+        return users;
     }
 
     /**
