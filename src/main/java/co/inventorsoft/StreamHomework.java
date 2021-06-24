@@ -3,12 +3,16 @@ package co.inventorsoft;
 import co.inventorsoft.model.Person;
 import co.inventorsoft.model.User;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toMap;
 
 /**
  * Contains simple cases for trying Stream API in action.
@@ -60,10 +64,9 @@ public class StreamHomework {
      * @return map {user email : user}
      */
     public Map<String, User> groupByEmail(final List<User> users) {
-        Map<String, User> usersMap = new HashMap<>();
-        for(int i=0; i<users.size(); ++i){
-            usersMap.put(users.get(i).getEmail(), users.get(i));
-        }
+        Map<String, User> usersMap = users.stream()
+                .collect(toMap(User::getEmail, Function.identity()));
+
         return usersMap;
     }
 
@@ -74,7 +77,9 @@ public class StreamHomework {
      * @return map {age : people with this age}
      */
     public Map<Integer, List<Person>> groupByAge(final List<Person> people) {
-        return null;
+        Map<Integer, List<Person>> usersMap = people.stream()
+                .collect(Collectors.groupingBy(Person::getAge));
+        return usersMap;
     }
 
     /**
@@ -87,6 +92,7 @@ public class StreamHomework {
      * @return string with unique names, like "Distinct names: a, b, c!"
      */
     public String collectDistinctNames(final List<Person> people) {
+
         return null;
     }
 }
