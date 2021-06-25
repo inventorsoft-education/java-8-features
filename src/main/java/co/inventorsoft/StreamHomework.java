@@ -3,16 +3,10 @@ package co.inventorsoft;
 import co.inventorsoft.model.Person;
 import co.inventorsoft.model.User;
 
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
+import java.util.*;
 import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.toList;
-import static java.util.stream.Collectors.toMap;
+import static java.util.stream.Collectors.*;
 
 /**
  * Contains simple cases for trying Stream API in action.
@@ -93,7 +87,11 @@ public class StreamHomework {
      * @return string with unique names, like "Distinct names: a, b, c!"
      */
     public String collectDistinctNames(final List<Person> people) {
+        String uniquePeopleStr = people.stream()
+                .map(p -> p.getName())
+                .distinct()
+                .collect(joining(", "));
 
-        return null;
+        return String.format("Distinct names: %s!", uniquePeopleStr);
     }
 }
