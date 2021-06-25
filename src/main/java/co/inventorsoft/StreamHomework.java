@@ -39,15 +39,13 @@ public class StreamHomework {
                 .distinct()
                 .collect(toList());
 
-        List<User> users = new ArrayList<>();
-        for(int i=0; i<emailsWithoutDup.size(); ++i){
-            users.add(new User(emails.get(i)));
-        }
+        List<User> users = emailsWithoutDup.stream()
+                .map(p -> new User(p))
+                .collect(Collectors.toList());
 
         users = users.stream()
                 .distinct()
                 .collect(toList());
-
         return users;
     }
 
@@ -58,11 +56,10 @@ public class StreamHomework {
      * @return map {user email : user}
      */
     public Map<String, User> groupByEmail(final List<User> users) {
-        Map<String, User> usersMap = new HashMap<>();
-        for(int i=0; i<users.size(); ++i){
-            usersMap.put(users.get(i).getEmail(), users.get(i));
-        }
-        return usersMap;
+        Map<String, User> output = new HashMap<>();
+        users.forEach((k) -> output.put(k.getEmail(), k));
+
+        return output;
     }
 
     /**
