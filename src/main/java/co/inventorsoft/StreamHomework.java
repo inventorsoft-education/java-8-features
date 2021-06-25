@@ -4,6 +4,7 @@ import co.inventorsoft.model.Person;
 import co.inventorsoft.model.User;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.*;
@@ -34,18 +35,11 @@ public class StreamHomework {
      * @return collection of user, without duplicates
      */
     public List<User> createUsers(final List<String> emails) {
-        List<String> emailsWithoutDup = emails.stream()
+        List<User> users = emails.stream()
                 .filter(email-> email!=null && !email.isEmpty())
                 .distinct()
-                .collect(toList());
-
-        List<User> users = emailsWithoutDup.stream()
                 .map(p -> new User(p))
                 .collect(Collectors.toList());
-
-        users = users.stream()
-                .distinct()
-                .collect(toList());
         return users;
     }
 
@@ -56,9 +50,8 @@ public class StreamHomework {
      * @return map {user email : user}
      */
     public Map<String, User> groupByEmail(final List<User> users) {
-        Map<String, User> output = new HashMap<>();
-        users.forEach((k) -> output.put(k.getEmail(), k));
-
+        Map<String, User> output = users.stream()
+                .collect(toMap(User::getEmail, Function.identity()));
         return output;
     }
 
