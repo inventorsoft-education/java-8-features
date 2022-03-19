@@ -28,7 +28,7 @@ public class StreamHomework {
 
     /**
      * Creates users, based on given collection of emails.
-     * Handles email duplicates and null-values.
+     * Handles email duplicates and null-values
      *
      * @param emails collection of emails, duplicates or null-values are possible
      * @return collection of user, without duplicates
