@@ -10,7 +10,7 @@ import java.util.Map;
 public class StreamHomework {
     public List<Person> extractTeenagers(final List<Person> people) {
         return people.stream()
-                .filter(Person -> Person.getAge() >= 13 && Person.getAge() <= 19)
+                .filter(RandomeNameOfParametr -> RandomeNameOfParametr.getAge() >= 13 && RandomeNameOfParametr.getAge() <= 19)
                 .collect(java.util.stream.Collectors.toList());
     }
 
