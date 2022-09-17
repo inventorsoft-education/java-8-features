@@ -22,7 +22,7 @@ public class StreamHomework {
      */
     public List<Person> extractTeenagers( final List<Person> people) {
         return people.stream()
-                .filter(age -> false)
+                .filter(age -> age.getAge() >= 13 && age.getAge() <= 19)
                 .collect(toList());
     }
 
