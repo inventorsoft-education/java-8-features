@@ -4,7 +4,10 @@ import co.inventorsoft.model.Person;
 import co.inventorsoft.model.User;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.*;
 
 /**
  * Contains simple cases for trying Stream API in action.
@@ -32,8 +35,8 @@ public class StreamHomework {
      */
     public List<User> createUsers(final List<String> emails) {
         Set<String> emailSet = new HashSet<>(emails);
-        return emailSet.stream().
-                filter(Objects::nonNull).map(User::new)
+        return emailSet.stream()
+                .filter(Objects::nonNull).map(User::new)
                 .collect(Collectors.toList());
     }
 
@@ -45,7 +48,7 @@ public class StreamHomework {
      */
     public Map<String, User> groupByEmail(final List<User> users) {
         return users.stream()
-                .collect(Collectors.toMap(User::getEmail, user -> user, (a, b) -> b));
+                .collect(toMap(User::getEmail, Function.identity()));
     }
 
     /**
@@ -55,14 +58,8 @@ public class StreamHomework {
      * @return map {age : people with this age}
      */
     public Map<Integer, List<Person>> groupByAge(final List<Person> people) {
-        Map<Integer, List<Person>> userMap = new HashMap<>();
-        people.forEach(person -> {
-            List<Person> peopleThisAge = people.stream()
-                    .filter(person1 -> Objects.equals(person1.getAge(), person.getAge()))
-                    .collect(Collectors.toList());
-            userMap.put(person.getAge(), peopleThisAge);
-        });
-        return userMap;
+        return people.stream()
+                .collect(groupingBy(Person::getAge));
     }
 
     /**
@@ -75,14 +72,9 @@ public class StreamHomework {
      * @return string with unique names, like "Distinct names: a, b, c!"
      */
     public String collectDistinctNames(final List<Person> people) {
-        List<String> allNames = new ArrayList<>();
-        people.forEach(person -> allNames.add(person.getName()));
-        StringBuilder names = new StringBuilder("Distinct names: ");
-        allNames.stream()
-                .filter(name -> names.indexOf(name) < 0)
-                .forEach(name -> names.append(name).append(", "));
-        names.replace(names.length() - 2, names.length(), "!");
-        return names.toString();
+        return people.stream()
+                .map(Person::getName).distinct()
+                .collect(Collectors.joining(", ", "Distinct names: ", "!"));
     }
 
 }
