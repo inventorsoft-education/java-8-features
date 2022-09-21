@@ -34,9 +34,10 @@ public class StreamHomework {
      * @return collection of user, without duplicates
      */
     public List<User> createUsers(final List<String> emails) {
-        Set<String> emailSet = new HashSet<>(emails);
-        return emailSet.stream()
-                .filter(Objects::nonNull).map(User::new)
+        return emails.stream()
+                .filter(Objects::nonNull)
+                .distinct()
+                .map(User::new)
                 .collect(Collectors.toList());
     }
 
